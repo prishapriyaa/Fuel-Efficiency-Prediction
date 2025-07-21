@@ -192,7 +192,7 @@ gnn_model, gnn_mae, gnn_r2, gnn_rmse = train_gnn_whole_graph(graph_hash, train_g
 
 tabnet_model, tabnet_mae, tabnet_r2, tabnet_rmse = train_tabnet(X_train, y_train.values, X_val, y_val.values)
 
-# --- Streamlit UI ---
+# Streamlit UI 
 st.title("🚗 Fuel Efficiency Predictor")
 st.markdown("### 📊 Model Comparison")
 st.write("Compare model performance on predicting mileage")
@@ -215,7 +215,7 @@ st.plotly_chart(fig2)
 fig_rmse = px.bar(results_df, x='Model', y='RMSE', color='Model', title='Root Mean Squared Error Comparison')
 st.plotly_chart(fig_rmse)
 
-# --- User Input Prediction ---
+# User Input Prediction 
 st.markdown("---")
 st.markdown("### 🎯 Predict Fuel Efficiency for Your Car")
 
@@ -247,7 +247,7 @@ user_input_scaled = scaler.transform(user_input)
 tabnet_pred = tabnet_model.predict(user_input_scaled).flatten()[0]
 
 # Predict using GNN
-full_X_scaled = X_train  # Use only training data for consistency
+full_X_scaled = X_train  
 full_y = y_train.values
 
 gnn_pred = predict_gnn_live(gnn_model, full_X_scaled, full_y, scaler, user_input)
@@ -265,7 +265,3 @@ with col2:
     st.markdown("#### 🟢 GNN")
     st.success(f"{gnn_pred:.2f} km/l**")
     st.markdown(f"MAE: {gnn_mae:.2f}  \nR² Score: {gnn_r2:.2f}  \nRMSE: {gnn_rmse:.2f}")
-
-# st.markdown("---")
-# st.markdown("#### ℹ Note")
-# st.markdown("2022UCS1623: Anusha Jain, 2022UCS1644: Prisha Priya ,2022UCS1666: Shyla Madan")
